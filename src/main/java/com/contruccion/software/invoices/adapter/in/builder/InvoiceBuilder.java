@@ -14,10 +14,10 @@ public class InvoiceBuilder {
         this.invoiceValidator = invoiceValidator;
     }
 
-    public Invoice build(String name) throws InputsException {
+    public Invoice build(String patientId) throws InputsException {
 
         Invoice invoice = new Invoice();
-        invoice.setName(invoiceValidator.nameValidator(name));
+        invoice.setPatientId(invoiceValidator.idValidator(patientId));
 
         return invoice;
     }

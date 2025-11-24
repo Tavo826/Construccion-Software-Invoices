@@ -7,6 +7,7 @@ import com.contruccion.software.invoices.infrastructure.persistence.mapper.Invoi
 import com.contruccion.software.invoices.infrastructure.persistence.repository.InvoiceRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,20 @@ public class InvoiceAdapter implements InvoicePort {
     }
 
     @Override
+    public List<Invoice> findAllByPatientId(long id) {
+
+        Optional<List<InvoiceEntity>> invoiceOptional = invoiceRepository.findAllByPatientId(id);
+
+        if (invoiceOptional.isPresent()) {
+            List<InvoiceEntity> invoiceEntityList = invoiceOptional.get();
+
+            return InvoiceMapper.toDomain(invoiceEntityList);
+        }
+
+        return null;
+    }
+
+    @Override
     public Invoice save(Invoice invoice) {
 
         InvoiceEntity invoiceEntity = invoiceRepository.save(InvoiceMapper.toEntity(invoice));
@@ -48,7 +63,9 @@ public class InvoiceAdapter implements InvoicePort {
         if (invoiceOptional.isPresent()) {
             InvoiceEntity invoiceEntity = invoiceOptional.get();
 
-            invoiceEntity.setName(invoice.getName());
+            invoiceEntity.setPatientId(invoice.getPatientId());
+            invoiceEntity.setEmployeeId(invoice.getEmployeeId());
+            invoiceEntity.setOrderId(invoice.getOrderId());
 
             InvoiceEntity updatedInvoiceInvoice = invoiceRepository.save(invoiceEntity);
 

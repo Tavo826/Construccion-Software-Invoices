@@ -2,13 +2,31 @@ package com.contruccion.software.invoices.adapter.in.rest.request;
 
 public class InvoiceRequest {
 
-    private String name;
+    private String patientId;
+    private String employeeId;
+    private String orderId;
 
-    public String getName() {
-        return name;
+    public String getPatientId() {
+        return patientId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(String employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

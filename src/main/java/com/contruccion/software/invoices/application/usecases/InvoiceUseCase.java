@@ -7,6 +7,8 @@ import com.contruccion.software.invoices.domain.services.GetInvoice;
 import com.contruccion.software.invoices.domain.services.UpdateInvoice;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class InvoiceUseCase {
 
@@ -29,6 +31,11 @@ public class InvoiceUseCase {
     public Invoice getInvoiceById(long id) throws Exception {
 
         return getInvoice.getById(id);
+    }
+
+    public List<Invoice> getAllInvoicesByPatientId(long id) throws Exception {
+
+        return getInvoice.getAllByPatientId(id);
     }
 
     public Invoice createInvoice(Invoice invoice) {

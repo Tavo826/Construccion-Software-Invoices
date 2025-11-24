@@ -9,7 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/api/invoices")
 public class InvoiceController {
 
     private final InvoiceBuilder invoiceBuilder;
@@ -20,7 +23,7 @@ public class InvoiceController {
         this.invoiceUseCase = invoiceUseCase;
     }
 
-    @GetMapping("/Invoices/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getInvoiceById(@PathVariable String id) throws Exception {
 
         Invoice invoice = invoiceUseCase.getInvoiceById(invoiceBuilder.getId(id));
@@ -28,10 +31,18 @@ public class InvoiceController {
         return ResponseEntity.ok(invoice);
     }
 
-    @PostMapping("/Invoices")
+    @GetMapping("patients/{id}")
+    public ResponseEntity<?> getAllInvoicesByPatientId(@PathVariable String id) throws Exception {
+
+        List<Invoice> invoiceList = invoiceUseCase.getAllInvoicesByPatientId(invoiceBuilder.getId(id));
+
+        return ResponseEntity.ok(invoiceList);
+    }
+
+    @PostMapping()
     public ResponseEntity<?> createInvoice(@RequestBody InvoiceRequest request) throws Exception {
 
-        Invoice invoice = invoiceBuilder.build(request.getName());
+        Invoice invoice = invoiceBuilder.build(request.getPatientId());
 
         Invoice createdInvoice = invoiceUseCase.createInvoice(invoice);
 
@@ -39,17 +50,17 @@ public class InvoiceController {
                 .body(createdInvoice);
     }
 
-    @PatchMapping("/Invoices/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<?> updateInvoice(@PathVariable String id, @RequestBody InvoiceRequest request) throws Exception {
 
-        Invoice invoice = invoiceBuilder.build(request.getName());
+        Invoice invoice = invoiceBuilder.build(request.getPatientId());
 
         Invoice updatedInvoice = invoiceUseCase.updateInvoice(invoiceBuilder.getId(id), invoice);
 
         return ResponseEntity.ok(updatedInvoice);
     }
 
-    @DeleteMapping("/Invoices/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteInvoice(@PathVariable String id) throws Exception {
 
         invoiceUseCase.deleteInvoice(invoiceBuilder.getId(id));

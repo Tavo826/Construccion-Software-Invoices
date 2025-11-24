@@ -3,7 +3,9 @@ package com.contruccion.software.invoices.domain.models;
 public class Invoice {
 
     private long id;
-    private String name;
+    private long patientId;
+    private long employeeId;
+    private String orderId;
 
     public long getId() {
         return id;
@@ -13,11 +15,27 @@ public class Invoice {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public long getPatientId() {
+        return patientId;
     }
 
-    public void setName(String nombre) {
-        this.name = nombre;
+    public void setPatientId(long patientId) {
+        this.patientId = patientId;
+    }
+
+    public long getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 }

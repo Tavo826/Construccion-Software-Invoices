@@ -1,5 +1,6 @@
 package com.contruccion.software.invoices.adapter.in.builder;
 
+import com.contruccion.software.invoices.adapter.in.rest.request.InvoiceRequest;
 import com.contruccion.software.invoices.adapter.in.validators.InvoiceValidator;
 import com.contruccion.software.invoices.application.exceptions.InputsException;
 import com.contruccion.software.invoices.domain.models.Invoice;
@@ -14,10 +15,12 @@ public class InvoiceBuilder {
         this.invoiceValidator = invoiceValidator;
     }
 
-    public Invoice build(String patientId) throws InputsException {
+    public Invoice build(InvoiceRequest request) throws InputsException {
 
         Invoice invoice = new Invoice();
-        invoice.setPatientId(invoiceValidator.idValidator(patientId));
+        invoice.setPatientId(invoiceValidator.idValidator(request.getPatientId()));
+        invoice.setEmployeeId(invoiceValidator.idValidator(request.getEmployeeId()));
+        invoice.setOrderId("");
 
         return invoice;
     }

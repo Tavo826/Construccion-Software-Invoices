@@ -42,7 +42,7 @@ public class InvoiceController {
     @PostMapping()
     public ResponseEntity<?> createInvoice(@RequestBody InvoiceRequest request) throws Exception {
 
-        Invoice invoice = invoiceBuilder.build(request.getPatientId());
+        Invoice invoice = invoiceBuilder.build(request);
 
         Invoice createdInvoice = invoiceUseCase.createInvoice(invoice);
 
@@ -53,7 +53,7 @@ public class InvoiceController {
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateInvoice(@PathVariable String id, @RequestBody InvoiceRequest request) throws Exception {
 
-        Invoice invoice = invoiceBuilder.build(request.getPatientId());
+        Invoice invoice = invoiceBuilder.build(request);
 
         Invoice updatedInvoice = invoiceUseCase.updateInvoice(invoiceBuilder.getId(id), invoice);
 

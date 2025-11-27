@@ -22,7 +22,7 @@ public class InvoiceAdapter implements InvoicePort {
     @Override
     public Invoice findById(long id) {
 
-        Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findById(id);
+        Optional<InvoiceEntity> invoiceOptional = invoiceRepository.findByPatientId(id);
 
         if (invoiceOptional.isPresent()) {
             InvoiceEntity invoiceEntity = invoiceOptional.get();
